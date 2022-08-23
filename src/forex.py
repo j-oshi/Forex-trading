@@ -12,13 +12,9 @@ def get_all_currencies():
     try:
 
         url = 'https://www.fxexchangerate.com/currency-symbols.html'
-
         request = requests.get(url,headers={'User-Agent': 'Mozilla/5.0'})
-
-        soup = bs(request.text, "lxml")
-        
-        table = soup.find('table', class_='fxtable')
-        
+        soup = bs(request.text, "lxml")        
+        table = soup.find('table', class_='fxtable')        
         header = table.find("tr")
         
         # empty list
@@ -45,6 +41,6 @@ def get_all_currencies():
         # Converting Pandas DataFrame
         # into CSV file
         dataFrame.to_csv(forex_file, index=False)
-        print('Download complete')
+        print('Currencies list download complete')
     except requests.exceptions.Timeout:
       print("Timeout occurred")
